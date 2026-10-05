@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Польза деревьев</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF5EF;--surf:#FFFFFF;--ink:#0B2E22;--mute:#4D6B5C;--line:#D3E2D7;--leaf:#2E9E5E;--lime:#C9E265;--deep:#0B2E22;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0C1A14;--surf:#13281E;--ink:#EAF4EC;--mute:#9DB8A8;--line:#22402F;--leaf:#4FC27F;--deep:#071410}}
+:root[data-theme="dark"]{--bg:#0C1A14;--surf:#13281E;--ink:#EAF4EC;--mute:#9DB8A8;--line:#22402F;--leaf:#4FC27F;--deep:#071410}
+html{scroll-padding-top:70px;scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 Manrope,system-ui,sans-serif;overflow-x:hidden}
+a{color:inherit}a:focus-visible,input:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+#bar{position:fixed;top:0;left:0;height:3px;width:100%;background:var(--lime);transform:scaleX(0);transform-origin:0 50%;z-index:30}
+.nav{position:fixed;top:0;left:0;right:0;z-index:20;padding-top:env(safe-area-inset-top,0px);color:#fff;transition:background .3s,backdrop-filter .3s}
+.nav.s{background:rgba(8,35,26,.75);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.nav .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:18px;padding-bottom:18px;font-weight:500}
+.nav a{text-decoration:none;margin-left:22px;opacity:.9}
+.nav a:first-child{margin:0;font-weight:800;font-size:1.15rem;opacity:1}
+.hero{position:relative;overflow:hidden;color:#fff;min-height:100vh;display:flex;align-items:center;background:radial-gradient(60% 55% at 78% 22%,#E9F59A 0,rgba(233,245,154,0) 60%),linear-gradient(180deg,#0F4A33 0%,#0B2E22 70%,#08231A 100%)}
+.hero::before{content:"";position:absolute;width:520px;height:520px;right:-120px;top:-120px;border-radius:50%;background:radial-gradient(circle,rgba(233,245,154,.55),rgba(233,245,154,0) 65%);animation:pulse 6s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.15);opacity:.7}}
+.copy{position:relative;z-index:3;max-width:800px;padding-top:12vh;padding-bottom:22vh}
+h1{font:800 clamp(2.7rem,9.5vw,6rem)/1 Manrope,sans-serif;letter-spacing:-.035em;margin:0 0 22px}
+h1 span{display:inline-block;opacity:0;transform:translateY(40px);animation:up .9s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i)*.12s + .2s)}
+h1 em{font-style:normal;color:var(--lime)}
+@keyframes up{to{opacity:1;transform:none}}
+.lead{font-size:1.2rem;max-width:40ch;opacity:0;margin:0 0 30px;animation:up .9s 1s forwards}
+.btn{display:inline-block;background:var(--lime);color:#0B2E22;font-weight:800;text-decoration:none;padding:15px 28px;border-radius:999px;opacity:0;animation:up .9s 1.2s forwards;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(201,226,101,.35)}
+.forest{position:absolute;left:0;right:0;bottom:-2px;width:100%;height:40%;z-index:2}
+.lf{position:absolute;top:-20px;width:14px;height:14px;background:var(--lime);border-radius:0 100% 0 100%;opacity:.75;animation:fall linear infinite;z-index:1}
+@keyframes fall{from{transform:translate(0,0) rotate(0)}to{transform:translate(60px,110vh) rotate(420deg)}}
+.rib{overflow:hidden;background:var(--lime);color:#0B2E22;font:800 1.15rem/1 Manrope,sans-serif;padding:18px 0;white-space:nowrap}
+.rib div{display:inline-block;animation:mq 28s linear infinite}
+@keyframes mq{to{transform:translateX(-50%)}}
+.rib span{margin:0 18px}
+section{padding:13vh 0 0}
+h2{font:800 clamp(2rem,6vw,3.4rem)/1.05 Manrope,sans-serif;letter-spacing:-.03em;margin:0 0 14px}
+.sub{color:var(--mute);max-width:50ch;margin:0 0 40px}
+.rv{opacity:0;transform:translateY(34px);transition:opacity .8s,transform .8s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.tile{background:var(--surf);border:1px solid var(--line);border-radius:24px;padding:28px;grid-column:span 2;min-height:230px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .35s,box-shadow .35s}
+.tile:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(11,46,34,.18)}
+.tile.w{grid-column:span 4}
+.tile.g{background:var(--leaf);border-color:var(--leaf);color:#06241A}
+.tile.d{background:var(--deep);border-color:var(--deep);color:#EAF4EC}
+.tile h3{font:800 1.5rem/1.15 Manrope,sans-serif;letter-spacing:-.02em;margin:18px 0 8px}
+.tile p{margin:0;max-width:42ch;color:var(--mute)}
+.tile.g p{color:#0B3A28}.tile.d p{color:#A9C7B6}
+.ic{width:46px;height:46px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .5s}
+.tile:hover .ic{transform:rotate(-10deg) scale(1.12)}
+.lab{display:grid;grid-template-columns:1fr 1fr;gap:20px;background:var(--deep);color:#EAF4EC;border-radius:32px;overflow:hidden}
+.lab .t{background:linear-gradient(180deg,#134F37,#0B2E22);display:flex;align-items:flex-end;justify-content:center;min-height:360px;padding:20px}
+.lab svg{width:100%;max-width:300px;height:320px}
+.lab .g{transform:scale(var(--s,.3));transform-origin:150px 330px;transition:transform .5s cubic-bezier(.3,1.3,.5,1)}
+.lab .x{padding:clamp(24px,5vw,52px);align-self:center}
+.lab h2{font-size:clamp(1.7rem,4vw,2.4rem);margin:0 0 10px}
+.lab .a{font:800 3.4rem/1 Manrope,sans-serif;color:var(--lime);margin:12px 0 4px}
+.lab p{color:#A9C7B6;margin:0 0 22px;min-height:84px}
+input[type=range]{width:100%;accent-color:var(--lime);height:32px}
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.step{padding-top:18px;position:relative}
+.step::after{content:"";position:absolute;top:0;left:0;height:3px;width:0;background:var(--leaf);transition:width 1s .3s}
+.step.in::after{width:100%}
+.step::before{counter-increment:s;content:counter(s);font:800 2.6rem/1 Manrope,sans-serif;color:var(--leaf);display:block;margin-bottom:10px}
+.step b{display:block;font:800 1.2rem/1.2 Manrope,sans-serif;margin-bottom:6px}
+.step p{margin:0;color:var(--mute);font-size:.98rem}
+.cta{margin-top:13vh;background:var(--deep);color:#EAF4EC;border-radius:32px;padding:clamp(32px,7vw,72px)}
+.cta h2{margin:0 0 12px}.cta p{margin:0;max-width:44ch;color:#A9C7B6}
+footer{padding:36px 0;color:var(--mute);font-size:.9rem}
+@media (max-width:760px){.bento{grid-template-columns:1fr}.tile,.tile.w{grid-column:auto;min-height:0}.steps{grid-template-columns:1fr 1fr}.lab{grid-template-columns:1fr}.lab .t{min-height:300px}}
+@media (prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important;scroll-behavior:auto!important}h1 span,.lead,.btn,.rv{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div class="nav" id="nav"><div class="wrap"><a href="#top">Деревья</a><div><a href="#benefits">Польза</a><a href="#lab">Рост</a><a href="#plant">Посадка</a></div></div></div>
+
+<header class="hero" id="top">
+<i class="lf" style="left:8%;animation-duration:11s"></i><i class="lf" style="left:24%;animation-duration:14s;animation-delay:-5s"></i><i class="lf" style="left:47%;animation-duration:12s;animation-delay:-2s"></i><i class="lf" style="left:63%;animation-duration:16s;animation-delay:-9s"></i><i class="lf" style="left:82%;animation-duration:13s;animation-delay:-6s"></i><i class="lf" style="left:92%;animation-duration:10s;animation-delay:-3s"></i>
+<div class="wrap" style="width:100%"><div class="copy">
+<h1><span style="--i:0">Дерево</span> <span style="--i:1">—</span> <span style="--i:2">это</span> <span style="--i:3">маленькая</span> <span style="--i:4"><em>фабрика</em></span> <span style="--i:5"><em>жизни</em></span></h1>
+<p class="lead">Оно чистит воздух, даёт тень, держит землю и воду и приютит тысячи живых существ.</p>
+<a class="btn" href="#benefits">Узнать, чем полезны деревья</a>
+</div></div>
+<svg class="forest" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+<g id="p2" fill="#14573D"><circle cx="90" cy="230" r="70"/><circle cx="260" cy="215" r="90"/><circle cx="470" cy="235" r="75"/><circle cx="650" cy="210" r="95"/><circle cx="860" cy="232" r="80"/><circle cx="1050" cy="214" r="92"/><circle cx="1180" cy="235" r="70"/></g>
+<g id="p1" fill="#0A3A29"><rect x="0" y="250" width="1200" height="60"/><circle cx="40" cy="260" r="60"/><circle cx="190" cy="262" r="70"/><circle cx="380" cy="255" r="64"/><circle cx="560" cy="265" r="74"/><circle cx="760" cy="255" r="66"/><circle cx="960" cy="265" r="72"/><circle cx="1140" cy="258" r="64"/></g>
+</svg>
+</header>
+<div class="rib"><div><span>Кислород</span><span>✦</span><span>Тень</span><span>✦</span><span>Чистая вода</span><span>✦</span><span>Дом для птиц</span><span>✦</span><span>Тишина</span><span>✦</span><span>Прохлада</span><span>✦</span><span>Плодородная земля</span><span>✦</span><span>Кислород</span><span>✦</span><span>Тень</span><span>✦</span><span>Чистая вода</span><span>✦</span><span>Дом для птиц</span><span>✦</span><span>Тишина</span><span>✦</span><span>Прохлада</span><span>✦</span><span>Плодородная земля</span><span>✦</span></div></div>
+
+<main class="wrap">
+<section id="benefits" style="padding-top:12vh">
+<h2 class="rv">Шесть причин любить деревья</h2>
+<p class="sub rv" style="--d:.1s">Польза деревьев заметна и в большом лесу, и в маленьком дворе.</p>
+<div class="bento">
+<div class="tile w g rv"><svg class="ic" viewBox="0 0 48 48"><path d="M6 20h22a5 5 0 1 0-5-5M6 29h30a5 5 0 1 1-5 5M6 38h14"/></svg><div><h3>Чистый воздух</h3><p>Листья поглощают углекислый газ, выделяют кислород и задерживают пыль. Рядом с деревьями дышится легче.</p></div></div>
+<div class="tile rv" style="--d:.1s"><svg class="ic" viewBox="0 0 48 48"><circle cx="24" cy="24" r="8"/><path d="M24 5v6M24 37v6M5 24h6M37 24h6M10.5 10.5l4.2 4.2M33.3 33.3l4.2 4.2M10.5 37.5l4.2-4.2M33.3 14.7l4.2-4.2"/></svg><div><h3>Тень и прохлада</h3><p>Под кроной прохладнее, чем на солнце: деревья остужают двор и улицу.</p></div></div>
+<div class="tile rv"><svg class="ic" viewBox="0 0 48 48"><path d="M24 6C17 16 12 22 12 29a12 12 0 0 0 24 0c0-7-5-13-12-23z"/></svg><div><h3>Земля и вода</h3><p>Корни скрепляют почву, а вода после дождя лучше впитывается и не размывает склоны.</p></div></div>
+<div class="tile w d rv" style="--d:.1s"><svg class="ic" viewBox="0 0 48 48"><path d="M10 30c0-9 6-16 15-16 5 0 8 3 10 6l7 2-7 3c-1 8-7 13-15 13-6 0-10-3-10-8z"/><circle cx="29" cy="21" r="1.5"/></svg><div><h3>Дом для животных</h3><p>В кронах гнездятся птицы, в дуплах живут белки и летучие мыши, а на коре и в листве прячутся насекомые.</p></div></div>
+<div class="tile rv"><svg class="ic" viewBox="0 0 48 48"><path d="M4 24c4-8 8-8 12 0s8 8 12 0 8-8 12 0"/></svg><div><h3>Тишина</h3><p>Густая зелень смягчает уличный шум и помогает отдохнуть.</p></div></div>
+<div class="tile rv" style="--d:.1s"><svg class="ic" viewBox="0 0 48 48"><path d="M8 14l16-8 16 8v20l-16 8-16-8z"/><path d="M8 14l16 8 16-8M24 22v20"/></svg><div><h3>Ресурсы</h3><p>Дерево даёт древесину, бумагу, плоды и орехи, если лес сажают и берегут.</p></div></div>
+</div>
+</section>
+
+<section id="lab">
+<h2 class="rv">Вырасти своё дерево</h2>
+<p class="sub rv" style="--d:.1s">Двигайте ползунок и смотрите, как меняется дерево с возрастом.</p>
+<div class="lab rv">
+<div class="t"><svg viewBox="0 0 300 340" role="img" aria-label="Дерево, которое растёт"><g class="g" id="tg"><rect x="136" y="170" width="28" height="160" rx="8" fill="#8A6244"/><circle cx="150" cy="140" r="92" fill="#2E9E5E"/><circle cx="100" cy="115" r="50" fill="#C9E265"/><circle cx="200" cy="100" r="46" fill="#4FC27F"/><circle cx="150" cy="62" r="40" fill="#2E9E5E"/></g><rect x="40" y="328" width="220" height="8" rx="4" fill="#0A3A29"/></svg></div>
+<div class="x"><h2>Возраст дерева</h2><div class="a" id="age">3 года</div><p id="txt"></p><input type="range" id="rng" min="1" max="50" value="3" aria-label="Возраст дерева"></div>
+</div>
+</section>
+
+<section id="plant">
+<h2 class="rv">Как посадить дерево</h2>
+<p class="sub rv" style="--d:.1s">Четыре простых шага, чтобы саженец прижился.</p>
+<div class="steps">
+<div class="step rv"><b>Выберите место</b><p>Подальше от стен, проводов и труб, где у дерева будет место расти.</p></div>
+<div class="step rv" style="--d:.12s"><b>Посадите</b><p>Выкопайте яму чуть шире корней и аккуратно засыпьте землёй.</p></div>
+<div class="step rv" style="--d:.24s"><b>Полейте</b><p>Хорошо польите сразу после посадки и затем в сухую погоду.</p></div>
+<div class="step rv" style="--d:.36s"><b>Берегите</b><p>Следите за саженцем и защищайте его от поломок и вытаптывания.</p></div>
+</div>
+</section>
+
+<div class="cta rv"><h2>Начните с одного дерева</h2><p>Посадите его во дворе, у школы или вместе с друзьями. Через несколько лет оно будет вашей гордостью.</p></div>
+<footer>Сайт о пользе деревьев. Сажайте и берегите.</footer>
+</main>
+<script>
+(function(){
+var d=document,nav=d.getElementById('nav'),bar=d.getElementById('bar'),p1=d.getElementById('p1'),p2=d.getElementById('p2'),H=d.documentElement;
+function on(){var y=window.pageYOffset||0,m=H.scrollHeight-innerHeight;
+nav.classList.toggle('s',y>40);bar.style.transform='scaleX('+(m>0?y/m:0)+')';
+if(y<innerHeight){p1.setAttribute('transform','translate(0,'+(y*.06)+')');p2.setAttribute('transform','translate(0,'+(y*.14)+')')}}
+addEventListener('scroll',on,{passive:true});on();
+var els=d.querySelectorAll('.rv');
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.15});els.forEach(function(e){io.observe(e)})}else{els.forEach(function(e){e.classList.add('in')})}
+var r=d.getElementById('rng'),g=d.getElementById('tg'),a=d.getElementById('age'),t=d.getElementById('txt');
+var S=[[5,'Саженец. Он ещё слабый, ему нужны полив и защита, но он уже начинает расти.'],[15,'Молодое дерево. Быстро тянется вверх и даёт первую лёгкую тень.'],[30,'Взрослое дерево. Даёт плотную тень, кормит птиц и насекомых и хорошо держит почву.'],[99,'Старое дерево. Настоящий дом для птиц, насекомых и мхов и главное украшение двора.']];
+function up(){var v=+r.value,s=.2+.8*Math.pow(v/50,.6);g.style.setProperty('--s',s);
+var w=v%10,w2=v%100,y=(w2>10&&w2<15)?'лет':(w==1?'год':(w>1&&w<5?'года':'лет'));a.textContent=v+' '+y;
+for(var i=0;i<S.length;i++){if(v<S[i][0]||i==S.length-1){t.textContent=S[i][1];break}}}
+r.addEventListener('input',up);up();
+})();
+</script>
+</body>
+</html>
